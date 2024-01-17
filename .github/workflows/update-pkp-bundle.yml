@@ -1,1 +1,25 @@
 
+# doc-publisher-workflow/.github/workflows/update-pkp-bundle.yml
+
+name: Update JSON
+
+on:
+  push:
+    paths:
+      - 'pkpbundle.json'
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Trigger Workflow in githubAction-demo
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.REPO_B_PAT }}
+          repository: anandu-m-s/gihubAction-demo
+          event-type: update-json
+          client-payload: '{"json_file": "pkpbundle.json"}'
