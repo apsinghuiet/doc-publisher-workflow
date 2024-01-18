@@ -19,7 +19,7 @@ jobs:
       - name: Trigger Workflow in githubAction-demo
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ anandu }}
+          token: ${{ REPO_githubAction-demo_PAT }}
           repository: anandu-m-s/gihubAction-demo
           event-type: update-json
           client-payload: '{"json_file": "pkpbundle.json"}'
