@@ -16,10 +16,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Trigger Workflow in githubAction-demo
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          token: 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
-          repository: anandu-m-s/gihubAction-demo
-          event-type: update-json
-          client-payload: '{"json_file": "pkpbundle.json"}'
+      - name: Run script to trigger reusable workflow
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            --data '{"ref":"main","inputs":{"json-file-path":"path/to/your/file.json"}}' \
+            "https://api.github.com/repos/anandu-m-s/githubAction-demo/actions/workflows/read-json.yaml/dispatches"
