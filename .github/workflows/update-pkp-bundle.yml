@@ -1,25 +1,24 @@
-
-# doc-publisher-workflow/.github/workflows/update-pkp-bundle.yml
-
-name: Update JSON
+name: Caller Workflow
 
 on:
   push:
-    paths:
-      - 'pkpbundle.json'
+    branches:
+      - main
 
 jobs:
-  update-json:
+  call-reusable-workflow:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
+      - name: Trigger Reusable Workflow
         uses: actions/checkout@v2
-
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
       - name: Run script to trigger reusable workflow
         run: |
           curl -X POST \
             -H "Accept: application/vnd.github.everest-preview+json" \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             --data '{"ref":"main","inputs":{"json-file-path":"pkpbundle.json"}}' \
-            "https://api.github.com/repos/anandu-m-s/githubAction-demo/actions/workflows/read-json.yaml/dispatches"
+            "https://api.github.com/repos/anandu-m-s/githubAction-demo/actions/workflows/read-json.yml/dispatches"
