@@ -9,10 +9,14 @@ jobs:
   trigger-reusable-workflow:
     runs-on: ubuntu-latest
     steps:
+      - name: Get Repository Token
+        id: get_token
+        run: echo "::set-output name=token::$(echo -n ${{ secrets.GITHUB_TOKEN }} | base64)"
+      
       - name: Trigger Reusable Workflow
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: apsinghuiet/doc-reusable-workflow
-          event-type: trigger-reusable-workflow
-          client-payload: '{"message": "Hello from the caller workflow!"}'
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/apsinghuiet/doc-reusable-workflow/actions/workflows/reusable_workflow.yml/dispatches \
+            -d '{"event_type": "trigger-reusable-workflow", "client_payload": {"message": "Hello from the caller workflow!"}}'
