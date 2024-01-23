@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Reusable Workflow
-        uses: actions/checkout@v2
-      - name: Trigger Reusable Workflow
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
