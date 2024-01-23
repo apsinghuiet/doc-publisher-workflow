@@ -1,10 +1,9 @@
 name: Caller Workflow
 
 on:
-  workflow_run:
-    workflows: ["reusable_workflow"]  # Specify the name of the reusable workflow here
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 jobs:
   trigger-reusable-workflow:
