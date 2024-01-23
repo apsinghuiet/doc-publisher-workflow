@@ -11,12 +11,12 @@ jobs:
     steps:
       - name: Get Repository Token
         id: get_token
-        run: echo "::set-output name=token::$(echo -n ${{ secrets.GITHUB_TOKEN }} | base64)"
+        run: echo "::set-output name=token::$(echo -n ${{ secrets.PAT }} | base64)"
       
       - name: Trigger Reusable Workflow
         run: |
           curl -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Authorization: token ${{ secrets.PAT }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/apsinghuiet/doc-reusable-workflow/actions/workflows/reusable_workflow.yml/dispatches \
             -d '{"event_type": "trigger-reusable-workflow", "client_payload": {"message": "Hello from the caller workflow!"}}'
