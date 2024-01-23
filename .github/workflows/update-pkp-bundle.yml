@@ -18,3 +18,5 @@ jobs:
           repository: apsinghuiet/doc-reusable-workflow  # Specify the repository where the reusable workflow is located
           event-type: trigger-reusable-workflow
           client-payload: '{"workflow": "reusable-workflow", "json-file-path": "pkpbundle.json"}'
+    env:
+          TOKEN: ${{ secrets.PAT }}
