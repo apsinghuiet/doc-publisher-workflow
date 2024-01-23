@@ -21,4 +21,4 @@ jobs:
             -H "Accept: application/vnd.github.everest-preview+json" \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             --data '{"ref":"main","inputs":{"json-file-path":"pkpbundle.json"}}' \
-            "https://api.github.com/repos/krishaapsingh/reusable-workflow-repo/actions/workflows/reusable-workflow.yml/dispatches"
+            "https://api.github.com/repos/apsinghuiet/doc-reusable-workflow/actions/workflows/reusable-workflow.yml/dispatches"
