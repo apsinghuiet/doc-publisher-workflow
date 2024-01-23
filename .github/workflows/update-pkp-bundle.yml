@@ -19,4 +19,4 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: apsinghuiet/doc-reusable-workflow
           event-type: trigger-reusable-workflow
-          client-payload: '{"ref": "main", "inputs": {"message": "Hello from the caller workflow!", "json_file_path": "pkpbundle.json"}}'
+          client-payload: '{"ref": "main", "inputs": {"message": "Hello from the caller workflow!", "json_file_path": "./pkpbundle.json"}}'
