@@ -9,10 +9,12 @@ jobs:
   trigger-reusable-workflow:
     runs-on: ubuntu-latest
     steps:
+      - name: Get PAT
+        run: echo "TOKEN=${{ secrets.PAT }}" >> $GITHUB_ENV
       - name: Trigger Reusable Workflow
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT }}
           repository: apsinghuiet/doc-reusable-workflow  # Specify the repository where the reusable workflow is located
           event-type: trigger-reusable-workflow
           client-payload: '{"workflow": "reusable-workflow", "json-file-path": "pkpbundle.json"}'
